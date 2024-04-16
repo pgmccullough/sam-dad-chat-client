@@ -1,11 +1,20 @@
 .users {
   position: fixed;
   box-sizing: border-box;
-  text-align: center;
   width: 16rem;
   box-shadow: inset 0 0 6px 0 #000;
   right: -1rem;
   top: -1rem;
   padding: 2rem;
-  height: calc(100vh + 1rem);
+  height: calc(100vh + 2rem);
+  background: var(--lavender);
+}
+
+.ul {
+  padding: 0;
+  margin: 0;
+}
+
+.li {
+  list-style-type: none;
 }

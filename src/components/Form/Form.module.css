@@ -2,9 +2,11 @@
   width: calc(100% - 2rem);
   border: 1px #ccc solid;
   border-radius: 6px;
+  overflow: hidden;
   margin: 1rem;
   display: flex;
   align-items: flex-end;
+  background: #fff;
 }
 
 .textarea {

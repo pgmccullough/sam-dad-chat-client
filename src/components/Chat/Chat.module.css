@@ -4,19 +4,25 @@
   align-items: flex-start;
   width: calc(100vw - 16rem);
   flex-grow: 2;
+  padding: 1rem 1rem 0 2rem;
 }
 
 .bubble {
   padding: 1rem;
-  border: 1px #000 solid;
+  border: 1px #ccc solid;
+  background: var(--mint-green);
+  border-radius: 8px;
+  font-size: 0.9rem;
   &.self {
     align-self: flex-end;
+    background: var(--lavender);
   }
 }
 
 .label {
   font-size: 0.75rem;
   line-height: 1.25rem;
+  padding: 0 0.5rem;
   &.self {
     align-self: flex-end;
   }
