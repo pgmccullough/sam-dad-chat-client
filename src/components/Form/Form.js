@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import styles from './Form.module.css';
 import { Emoji } from './Emoji/Emoji';
 import { Giphy } from './Giphy/Giphy';
+import { readAndCompressImage } from 'browser-image-resizer';
 
 export const Form = ({ textarea, setTextarea, socket, username }) => {
 
@@ -42,18 +43,37 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
     setShowGifs(false);
   }
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
 
-    reader.onload = function(e) {
-      const extension = file.name.split('.').pop().toLowerCase();
-      if(!safeImageExtensions.includes(extension)) return 'not valid image';
-      const imageDataUrl = e.target.result;
-      socket.emit('message', {username, textarea: `<img src="${imageDataUrl}" width="200px">`});
-    };
-    reader.readAsDataURL(file);
-  };
+  //   reader.onload = function(e) {
+  //     const extension = file.name.split('.').pop().toLowerCase();
+  //     if(!safeImageExtensions.includes(extension)) return 'not valid image';
+  //     const imageDataUrl = e.target.result;
+  //     socket.emit('message', {username, textarea: `<img src="${imageDataUrl}" width="200px">`});
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
+
+  async function handleFileChange(e) {
+    const file = e.target.files[0];
+    const extension = file.name.split('.').pop().toLowerCase();
+    if(!safeImageExtensions.includes(extension)) return 'not valid image';
+    try {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+          const base64String = event.target.result;
+          console.log("Base64 string:", base64String);
+          socket.emit('message', {username, textarea: `<img src="${base64String}" width="200px">`});
+      };
+      let resizedImage = await readAndCompressImage(file, {maxWidth: 200});
+      reader.readAsDataURL(resizedImage);
+    } catch (error) {
+      console.error(error);
+      throw(error);
+    }
+  }
   
   return (
     <section className={styles.formParent}>
