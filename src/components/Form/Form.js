@@ -63,9 +63,8 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
     try {
       const reader = new FileReader();
       reader.onload = function(event) {
-          const base64String = event.target.result;
-          console.log("Base64 string:", base64String);
-          socket.emit('message', {username, textarea: `<img src="${base64String}" width="200px">`});
+        const base64String = event.target.result;
+        socket.emit('message', {username, textarea: `<img src="${base64String}" width="200px">`});
       };
       let resizedImage = await readAndCompressImage(file, {maxWidth: 200});
       reader.readAsDataURL(resizedImage);
