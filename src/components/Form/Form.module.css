@@ -60,3 +60,7 @@
   border: none;
   background-image: url('../../assets/emoji.png');
 }
+
+.hiddeninput {
+  display: none;
+}

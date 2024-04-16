@@ -7,7 +7,14 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
 
   const [ showEmojis, setShowEmojis ] = useState(false);
   const [ showGifs, setShowGifs ] = useState(false);
+  
   const textareaRef = useRef(null);
+  const fileSelect = useRef(null);
+
+  const safeImageExtensions = [
+    'jpg', 'jpeg', 'png', 'gif', 'bmp',
+    'tiff', 'tif', 'webp', 'svg'
+  ]
 
   const handleTextareaInput = () => {
     const textarea = textareaRef.current;
@@ -34,6 +41,22 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
     socket.emit('message', {username, textarea: `<img src="${gif}" width="200px">`});
     setShowGifs(false);
   }
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+      const extension = file.name.split('.').pop().toLowerCase();
+      if(!safeImageExtensions.includes(extension)) return 'not valid image';
+      const imageDataUrl = e.target.result;
+      // const image = new Image();
+      // image.src = imageDataUrl;
+      // image.width = '200px';
+      socket.emit('message', {username, textarea: `<img src="${imageDataUrl}" width="200px">`});
+    };
+    reader.readAsDataURL(file);
+  };
   
   return (
     <section className={styles.formParent}>
@@ -66,7 +89,16 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
           :<div
             className={styles.icons}
           >
-            {/* <button className={styles.imageicon} /> */}
+            <input 
+              className={styles.hiddeninput}
+              type="file"
+              ref={fileSelect}
+              onChange={handleFileChange}
+            />
+            <button 
+              className={styles.imageicon}
+              onClick={() => fileSelect.current.click()}  
+            />
             <button 
               className={styles.gificon}
               onClick={() => setShowGifs(!showGifs)}
