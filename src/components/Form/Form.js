@@ -54,7 +54,7 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
         const base64String = event.target.result;
         socket.emit('message', {username, textarea: `<img src="${base64String}" width="200px">`});
       };
-      let resizedImage = await readAndCompressImage(file, {maxWidth: 200});
+      let resizedImage = await readAndCompressImage(file, {maxWidth: 600});
       reader.readAsDataURL(resizedImage);
     } catch (error) {
       console.error(error);
