@@ -24,8 +24,10 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
   }
 
   const enterSubmit = (e) => {
-    e.preventDefault();
-    if(e.code==="Enter" && !e.shiftKey) submitMessage();
+    if(e.code==="Enter" && !e.shiftKey) {
+      e.preventDefault();
+      submitMessage();
+    }
   }
 
   const sendGif = (gif) => {
