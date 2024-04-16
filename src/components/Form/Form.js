@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import styles from './Form.module.css';
+import { Emoji } from './Emoji/Emoji';
 
 export const Form = ({ textarea, setTextarea, socket, username }) => {
 
@@ -24,6 +25,7 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
   
   return (
     <section className={styles.formParent}>
+      <Emoji />
       <textarea
         ref={textareaRef}
         value={textarea}

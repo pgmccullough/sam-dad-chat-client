@@ -1,0 +1,43 @@
+.emojibox {
+  position: relative;
+  width: 400px;
+  overflow: hidden;
+  background: #eee;
+  position: absolute;
+  height: 400px;
+  margin-top: calc(-400px - 7rem);
+}
+
+.emojiinner {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  height: calc(400px - 2rem);
+  overflow-y: scroll;
+  padding: 0 1rem;
+}
+
+.emoji {
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.emoji:hover {
+  background: #ccc;
+}
+
+.search {
+  padding: 1rem 1.75rem;
+  width: 100%;
+}
+
+.search input {
+  border: none;
+  background: none;
+  border-bottom: 3px #ccc solid;
+  width: 100%;
+}
