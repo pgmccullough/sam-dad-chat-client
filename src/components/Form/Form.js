@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './Form.module.css';
 import { Emoji } from './Emoji/Emoji';
 import { Giphy } from './Giphy/Giphy';
@@ -43,21 +43,9 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
     setShowGifs(false);
   }
 
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   const reader = new FileReader();
-
-  //   reader.onload = function(e) {
-  //     const extension = file.name.split('.').pop().toLowerCase();
-  //     if(!safeImageExtensions.includes(extension)) return 'not valid image';
-  //     const imageDataUrl = e.target.result;
-  //     socket.emit('message', {username, textarea: `<img src="${imageDataUrl}" width="200px">`});
-  //   };
-  //   reader.readAsDataURL(file);
-  // };
-
   async function handleFileChange(e) {
     const file = e.target.files[0];
+    if(!file) return;
     const extension = file.name.split('.').pop().toLowerCase();
     if(!safeImageExtensions.includes(extension)) return 'not valid image';
     try {
