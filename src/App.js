@@ -21,7 +21,8 @@ export const App = () => {
   }, [ username ])
 
   socket.on('message', (res) => {
-    setConvo(res)
+    if(res.length > 30) res = res.slice(res.length-30);
+    setConvo(res);
   });
 
   socket.on('socketId', (res) => {
