@@ -18,6 +18,7 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
   };
 
   const submitMessage = () => {
+    if(!textarea.trim()) return;
       socket.emit('message', {username, textarea});
       setTextarea('');
   }
