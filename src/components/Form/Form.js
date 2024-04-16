@@ -50,9 +50,6 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
       const extension = file.name.split('.').pop().toLowerCase();
       if(!safeImageExtensions.includes(extension)) return 'not valid image';
       const imageDataUrl = e.target.result;
-      // const image = new Image();
-      // image.src = imageDataUrl;
-      // image.width = '200px';
       socket.emit('message', {username, textarea: `<img src="${imageDataUrl}" width="200px">`});
     };
     reader.readAsDataURL(file);
