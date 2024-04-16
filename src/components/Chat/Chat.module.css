@@ -7,6 +7,12 @@
   padding: 1rem 1rem 0 2rem;
 }
 
+@media (max-width: 620px) {
+  .chat {
+    width: 100vw;
+  }
+}
+
 .bubble {
   padding: 1rem;
   border: 1px #ccc solid;

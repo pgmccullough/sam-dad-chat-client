@@ -25,13 +25,21 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
         className={styles.textarea}
       />
       {textarea
-        ?<button onClick={
-          () => {
-            socket.emit('message', {username, textarea});
-            setTextarea('');
-          }
-        }>Send</button>
-        :<div>icons</div>
+        ?<button
+            className={styles.button}
+            onClick={
+            () => {
+              socket.emit('message', {username, textarea});
+              setTextarea('');
+            }
+          } />
+          :<div
+            className={styles.icons}
+          >
+            <button className={styles.imageicon} />
+            <button className={styles.gificon}>GIF</button>
+            <button className={styles.emojiicon} />
+          </div>
       }
     </section>
   )

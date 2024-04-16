@@ -15,6 +15,12 @@ body {
   display: flex;
 }
 
+@media (max-width: 620px) {
+  .app {
+    display: block;
+  }
+}
+
 .chatForm {
   display: flex;
   flex-direction: column;

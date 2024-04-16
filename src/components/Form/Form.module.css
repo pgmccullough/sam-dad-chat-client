@@ -5,7 +5,8 @@
   overflow: hidden;
   margin: 1rem;
   display: flex;
-  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
   background: #fff;
 }
 
@@ -15,4 +16,44 @@
   width: 90%;
   border: 0;
   outline: 0;
+}
+
+.button {
+  background: url('../../assets/send.png');
+  border: none;
+  background-size: 24px;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.icons {
+  display: flex;
+  gap: 4px;
+  margin-right: 4px;
+}
+
+.imageicon, .gificon, .emojiicon {
+  border: none;
+  background: url('../../assets/image.png');
+  background-size: 24px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.gificon {
+  background: #fff;
+  border: 3px var(--blue) solid;
+  border-radius: 3px;
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 0.6rem;
+  padding: 0;
+}
+
+.emojiicon {
+  border: none;
+  background-image: url('../../assets/emoji.png');
 }
