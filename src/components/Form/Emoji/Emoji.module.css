@@ -13,7 +13,7 @@
   background: #eee;
   position: absolute;
   height: 400px;
-  margin-top: calc(-400px - 7rem);
+  margin-top: calc(-400px - 5rem);
   right: 17rem;
 }
 
@@ -54,4 +54,15 @@
 .gif {
   width: 30%;
   margin: 0.5%;
+}
+
+.giphyattr {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  background: #eee;
+  padding: 0.5rem;
+  width: 160px;
+  border-radius: 7px 0 0 0;
+  box-shadow: 0 0 6px 0 #666;
 }

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import styles from '../Emoji/Emoji.module.css';
+import giphyLogo from '../../../assets/giphy.png';
 
 export const Giphy = ({ sendGif, setShowGifs }) => {
 
@@ -61,6 +62,10 @@ export const Giphy = ({ sendGif, setShowGifs }) => {
             />
           )}
         </div>
+        <img 
+          className={styles.giphyattr}
+          src={giphyLogo} 
+        />
       </div>
     </>
   )
