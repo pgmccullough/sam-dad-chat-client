@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import styles from './Form.module.css';
 import { Emoji } from './Emoji/Emoji';
 
 export const Form = ({ textarea, setTextarea, socket, username }) => {
 
+  const [ showEmojis, setShowEmojis ] = useState(false);
   const textareaRef = useRef(null);
 
   const handleTextareaInput = () => {
@@ -25,7 +26,12 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
   
   return (
     <section className={styles.formParent}>
-      <Emoji />
+      {showEmojis 
+        && <Emoji
+          setShowEmojis={setShowEmojis}
+          setTextarea={setTextarea}
+        />
+      }
       <textarea
         ref={textareaRef}
         value={textarea}
@@ -43,9 +49,12 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
           :<div
             className={styles.icons}
           >
-            <button className={styles.imageicon} />
-            <button className={styles.gificon}>GIF</button>
-            <button className={styles.emojiicon} />
+            {/* <button className={styles.imageicon} />
+            <button className={styles.gificon}>GIF</button> */}
+            <button 
+              className={styles.emojiicon}
+              onClick={() => setShowEmojis(!showEmojis)}
+            />
           </div>
       }
     </section>

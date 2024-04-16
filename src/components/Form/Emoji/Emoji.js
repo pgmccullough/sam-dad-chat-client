@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useState } from 'react';
 import styles from './Emoji.module.css';
 
-export const Emoji = () => {
+export const Emoji = ({ setShowEmojis, setTextarea }) => {
   const [ emojiList, setEmojiList ] = useState([]);
   const [ emojiSearch, setEmojiSearch ] = useState('');
   
@@ -33,22 +33,31 @@ export const Emoji = () => {
   }, [ emojiSearch ]);
 
   return (
-    <div className={styles.emojibox}>
-      <div className={styles.search}>
-        <input 
-          type="text" 
-          placeholder="Search emojis" 
-          value={emojiSearch}
-          onChange={(e) => setEmojiSearch(e.target.value)}
-        />
+    <>
+      <div
+        className={styles.emojibg}
+        onClick={() => setShowEmojis(false)}
+      />
+      <div className={styles.emojibox}>
+        <div className={styles.search}>
+          <input 
+            type="text" 
+            placeholder="Search emojis" 
+            value={emojiSearch}
+            onChange={(e) => setEmojiSearch(e.target.value)}
+          />
+        </div>
+        <div className={styles.emojiinner}>
+          {emojiList?.map(({ character }) => 
+            <div 
+              className={styles.emoji}
+              onClick={() => {setTextarea(prev => prev+character)}}
+            >
+              {character}
+            </div>
+          )}
+        </div>
       </div>
-      <div className={styles.emojiinner}>
-        {emojiList?.map(({ character }) => 
-          <div className={styles.emoji}>
-            {character}
-          </div>
-        )}
-      </div>
-    </div>
+    </>
   )
 }
