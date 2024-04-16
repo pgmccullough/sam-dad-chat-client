@@ -12,6 +12,15 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
       textarea.style.height = textarea.scrollHeight + 'px';
     }
   };
+
+  const submitMessage = () => {
+      socket.emit('message', {username, textarea});
+      setTextarea('');
+  }
+
+  const enterSubmit = (e) => {
+    if(e.code==="Enter" && !e.shiftKey) submitMessage();
+  }
   
   return (
     <section className={styles.formParent}>
@@ -22,17 +31,13 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
           setTextarea(e.target.value);
           handleTextareaInput()
         }}
+        onKeyDown={enterSubmit}
         className={styles.textarea}
       />
       {textarea
         ?<button
             className={styles.button}
-            onClick={
-            () => {
-              socket.emit('message', {username, textarea});
-              setTextarea('');
-            }
-          } />
+            onClick={submitMessage} />
           :<div
             className={styles.icons}
           >
