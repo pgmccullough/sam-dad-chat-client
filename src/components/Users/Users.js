@@ -19,7 +19,7 @@ export const Users = ({ onlineUsers }) => {
       </div>
       <h2>{Object.values(onlineUsers).length} user{(Object.values(onlineUsers).length > 1)&&'s'} online</h2>
       <ul className={styles.ul}>
-        {Object.values(onlineUsers).map(user => <li className={styles.li}>{user}</li>)}
+        {Object.values(onlineUsers).map((user, i) => <li className={styles.li} key={i}>{user}</li>)}
       </ul>
     </aside>
   )
