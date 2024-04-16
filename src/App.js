@@ -16,8 +16,6 @@ export const App = () => {
   const [ username, setUsername ] = useState(localStorage.username);
   const [ onlineUsers, setOnlineUsers ] = useState({});
 
-  console.log(process.env.REACT_APP_WS_URI)
-
   useEffect(() => {
     if(username) socket.emit('socketId', username);
   }, [ username ])
