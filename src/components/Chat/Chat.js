@@ -24,8 +24,8 @@ export const Chat = ({ convo }) => {
             key={id}
             className={`${styles.bubble} ${username===localStorage.username?styles.self:''}`}
             ref={i===convo.length-1 ? scrollField : null}
+            dangerouslySetInnerHTML={{__html: textarea}}
           >
-            {textarea}
           </article>
         </Fragment>
       )}
