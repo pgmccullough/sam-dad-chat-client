@@ -1,0 +1,23 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: calc(100vw - 16rem);
+  flex-grow: 2;
+}
+
+.bubble {
+  padding: 1rem;
+  border: 1px #000 solid;
+  &.self {
+    align-self: flex-end;
+  }
+}
+
+.label {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  &.self {
+    align-self: flex-end;
+  }
+}
