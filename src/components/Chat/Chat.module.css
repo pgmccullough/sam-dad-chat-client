@@ -21,6 +21,7 @@
   background: var(--mint-green);
   border-radius: 8px;
   font-size: 0.9rem;
+  word-break: break-all;
   &.self {
     align-self: flex-end;
     background: var(--lavender);
