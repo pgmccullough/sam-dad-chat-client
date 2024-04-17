@@ -34,7 +34,11 @@ export const App = () => {
       <>
         <div className={styles.app}>
           <div className={styles.chatForm}>
-            <Chat convo={convo} />
+            <Chat 
+              convo={convo}
+              setConvo={setConvo}
+              socket={socket}
+            />
             <Form
               textarea={textarea}
               setTextarea={setTextarea}
