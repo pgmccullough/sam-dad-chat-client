@@ -23,6 +23,7 @@ export const Form = ({ textarea, setTextarea, socket, username }) => {
       textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight + 'px';
     }
+    socket.emit('typing', username);
   };
 
   const submitMessage = () => {

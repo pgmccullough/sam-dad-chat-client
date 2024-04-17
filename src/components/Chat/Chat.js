@@ -5,6 +5,7 @@ import styles from './Chat.module.css';
 export const Chat = ({ convo, setConvo, socket }) => {
 
   const [ showMsgOptions, setShowMsgOptions ] = useState(null);
+  const [ userTyping, setUserTyping ] = useState(false);
   const scrollField = useRef(null);
 
 
@@ -25,6 +26,43 @@ export const Chat = ({ convo, setConvo, socket }) => {
       socket.emit('updateConvo', filtered); 
       return filtered;
     })
+  }
+
+  const debounce = (func, delay) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  }
+
+  useEffect(() => {
+    const handleTyping = () => {
+      setUserTyping(true);
+      debouncedSetUserTyping(false);
+    };
+
+    const debouncedSetUserTyping = debounce(() => {
+      setUserTyping(false);
+    }, 1000);
+
+    socket.on('typing', handleTyping);
+
+    return () => {
+      socket.off('typing', handleTyping);
+    };
+  }, []);
+
+  const Typing = () => {
+    return (
+      <div className={`${styles.bubble} ${styles.typing}`}>
+        <div className={`${styles.dot} ${styles.one}`} />
+        <div className={`${styles.dot} ${styles.two}`} />
+        <div className={`${styles.dot} ${styles.three}`} />
+      </div>
+    )
   }
 
   return (
@@ -61,6 +99,7 @@ export const Chat = ({ convo, setConvo, socket }) => {
             }
         </div>
       )}
+      {userTyping && <Typing />}
     </main>
   );
 }

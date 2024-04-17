@@ -1,3 +1,10 @@
+@keyframes typeDot {
+  from {}
+  to {
+    transform: scale(1.3);
+  }
+}
+
 .chat {
   display: flex;
   flex-direction: column;
@@ -80,4 +87,27 @@
   white-space: nowrap;
   opacity: 0.5;
   font-size: 0.75rem;
+}
+
+.typing {
+  background: #fff;
+  opacity: 0.5;
+  display: flex;
+  gap: 7px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  background: #ccc;
+  border-radius: 100%;
+  &.one {
+    animation: typeDot 0.4s alternate infinite;
+  }
+  &.two {
+    animation: typeDot 0.4s 0.2s alternate infinite;
+  }
+  &.three {
+    animation: typeDot 0.4s 0.4s alternate infinite;
+  }
 }
