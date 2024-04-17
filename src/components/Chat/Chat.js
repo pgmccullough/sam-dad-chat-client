@@ -89,8 +89,19 @@ export const Chat = ({ convo, setConvo, setUserTyping, socket, userTyping }) => 
                 <div className={styles.editModal}>
                   <ul>
                     <date className={styles.date}>{formatDate(date)}</date>
-                    <li>Edit</li>
-                    <li onClick={() => deleteMessage(id)}>Delete</li>
+                    <div className={styles.buttons}>
+                      <button
+                        className={styles.edit}
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        className={styles.delete}
+                        onClick={() => deleteMessage(id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </ul>
                 </div>
               </>

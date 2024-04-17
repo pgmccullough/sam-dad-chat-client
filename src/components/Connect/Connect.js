@@ -14,6 +14,12 @@ export const Connect = ({ setUsername }) => {
           value={namestate} 
           placeholder="Username"
           onChange={(e) => setNamestate(e.target.value)}
+          onKeyDown={(e) => {
+            if(e.code==="Enter") {
+              setUsername(namestate);
+              localStorage.username = namestate;
+            }
+          }}
         /><br />
         <button 
           className={styles.button}

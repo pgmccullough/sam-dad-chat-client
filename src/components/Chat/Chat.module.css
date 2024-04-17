@@ -111,3 +111,23 @@
     animation: typeDot 0.4s 0.4s alternate infinite;
   }
 }
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding-top: 0.5rem;
+}
+
+.delete, .edit {
+  background: var(--rose);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+}
+
+.edit {
+  background: var(--blue);
+}
