@@ -18,6 +18,7 @@ export const App = () => {
   const [ onlineUsers, setOnlineUsers ] = useState({});
   const [ missedMessages, setMissedMessages ] = useState(0);
   const [ interactionCheck, setInteractionCheck ] = useState(false);
+  const [ userTyping, setUserTyping ] = useState(false);
 
   const audioEle = useRef(null);
 
@@ -41,6 +42,7 @@ export const App = () => {
   }, []);
 
   socket.on('message', (res) => {
+    setUserTyping(false);
     if(res.length > 30) res = res.slice(res.length-30);
     if(document.hidden) {
       if(audioEle.current && interactionCheck) {
@@ -70,6 +72,8 @@ export const App = () => {
               convo={convo}
               setConvo={setConvo}
               socket={socket}
+              userTyping={userTyping}
+              setUserTyping={setUserTyping}
             />
             <Form
               textarea={textarea}

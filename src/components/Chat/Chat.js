@@ -2,12 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { formatDate } from '../../utils/dateFormat';
 import styles from './Chat.module.css';
 
-export const Chat = ({ convo, setConvo, socket }) => {
+export const Chat = ({ convo, setConvo, setUserTyping, socket, userTyping }) => {
 
   const [ showMsgOptions, setShowMsgOptions ] = useState(null);
-  const [ userTyping, setUserTyping ] = useState(false);
   const scrollField = useRef(null);
-
 
   useEffect(() => {
     if(scrollField.current) {
