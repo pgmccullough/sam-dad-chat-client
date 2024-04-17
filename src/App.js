@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import io from "socket.io-client";
 import { Connect } from './components/Connect/Connect';
 import { Users } from './components/Users/Users';
 import { Chat } from './components/Chat/Chat';
 import { Form } from './components/Form/Form';
+import alert from './assets/audio/default-alert.mp3';
 
 import styles from './App.module.css';
 
@@ -15,13 +16,40 @@ export const App = () => {
   const [ convo, setConvo ] = useState([]);
   const [ username, setUsername ] = useState(localStorage.username);
   const [ onlineUsers, setOnlineUsers ] = useState({});
+  const [ missedMessages, setMissedMessages ] = useState(0);
+  const [ interactionCheck, setInteractionCheck ] = useState(false);
+
+  const audioEle = useRef(null);
 
   useEffect(() => {
     if(username) socket.emit('socketId', username);
   }, [ username ])
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if(!document.hidden) {
+        document.title = 'SammyChat';
+        setMissedMessages(0);
+      }
+    };
+    document.addEventListener('click', () => setInteractionCheck(true));
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('click', () => setInteractionCheck(true));
+    };
+  }, []);
+
   socket.on('message', (res) => {
     if(res.length > 30) res = res.slice(res.length-30);
+    if(document.hidden) {
+      if(audioEle.current && interactionCheck) {
+        audioEle.current.play();
+      }
+      const newCount = missedMessages + 1;
+      setMissedMessages(newCount);
+      document.title = `(${newCount}) SammyChat`;
+    }
     setConvo(res);
   });
 
@@ -32,6 +60,10 @@ export const App = () => {
   return username
     ?(
       <>
+        <audio 
+          src={alert}
+          ref={audioEle}
+        />
         <div className={styles.app}>
           <div className={styles.chatForm}>
             <Chat 
