@@ -70,6 +70,7 @@ export const App = () => {
           <div className={styles.chatForm}>
             <Chat 
               convo={convo}
+              onlineUsers={onlineUsers}
               setConvo={setConvo}
               socket={socket}
               userTyping={userTyping}

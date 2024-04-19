@@ -17,6 +17,13 @@
   right: 17rem;
 }
 
+@media (max-width: 620px) {
+  .emojibox {
+    width: calc(100% - 2rem);
+    right: 1rem;
+  }
+}
+
 .emojiinner {
   position: relative;
   display: flex;

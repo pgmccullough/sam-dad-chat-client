@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { formatDate } from '../../utils/dateFormat';
 import styles from './Chat.module.css';
+import { CoinFlick } from '../../games/CoinFlick/CoinFlick';
 
-export const Chat = ({ convo, setConvo, setUserTyping, socket, userTyping }) => {
+export const Chat = ({ 
+  convo, 
+  onlineUsers, 
+  setConvo, 
+  setUserTyping, 
+  socket, 
+  userTyping 
+}) => {
 
   const [ showMsgOptions, setShowMsgOptions ] = useState(null);
   const scrollField = useRef(null);
@@ -67,6 +75,9 @@ export const Chat = ({ convo, setConvo, setUserTyping, socket, userTyping }) => 
     <main 
       className={styles.chat}
     >
+      {/* <CoinFlick
+        onlineUsers={onlineUsers}
+      /> */}
       {convo.map(({date, id, textarea, username}, i) => 
         <div key={id} className={`${styles.convocontainer} ${username===localStorage.username?styles.self:''}`}>
           {username !== convo[i-1]?.username 
